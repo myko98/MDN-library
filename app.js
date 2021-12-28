@@ -19,7 +19,11 @@ const {body, validationResult} = require('express-validator')
 var app = express();
 
 //Set up default mongoose connection
-var mongoDB = 'mongodb+srv://myko:12345@library.la0b6.mongodb.net/local_library?retryWrites=true&w=majority';
+var dev_db_url = 'mongodb+srv://myko:12345@library.la0b6.mongodb.net/local_library?retryWrites=true&w=majority';
+
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
+
+
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 
 //Get the default connection
